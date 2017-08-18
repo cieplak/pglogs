@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-
 #include <tao/pegtl.hpp>
 
 using namespace tao::TAOCPP_PEGTL_NAMESPACE;
@@ -52,6 +51,8 @@ struct Event {
 
 namespace logs {
 
+  // Grammar
+  
   struct sql_op : sor< string<'U','P','D','A','T','E'>,
 		       string<'I','N','S','E','R','T'>,
 		       string<'D','E','L','E','T','E'> > {};
@@ -91,10 +92,10 @@ namespace logs {
 
   struct grammar : sor< logline, begin, commit > {};
 
+  // Parser Actions
+
   template< typename Rule >
   struct action : nothing< Rule > {};
-
-
   
   template<>
   struct action< table > {
@@ -130,7 +131,6 @@ namespace logs {
       record.fields.back().type = in.string();
     }
   };
-
   
   template<>
   struct action< value > {
@@ -139,7 +139,6 @@ namespace logs {
       record.fields.back().value = in.string();
     }
   };
-  
 }
 
 int main() {
