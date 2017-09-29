@@ -11,10 +11,10 @@ cli:
 cli-debug:
 	c++ -g -std=c++1z $(INCLUDES) src/main.cxx -o bin/pglogs
 
-download_deps:
+deps:
 	cd include && git clone --depth 1 https://github.com/cieplak/PEGTL.git
 
-download_test_deps:
+test_deps:
 	cd test
 	$(DOWNLOAD) https://github.com/philsquared/Catch/releases/download/v1.7.0/catch.hpp
 
